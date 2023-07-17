@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="contact_form">
+    <output-path>$PROJECT_DIR$/../out/artifacts/contact_form</output-path>
+    <root id="archive" name="contact_form.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="O4_Contact_Form" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="O4_Contact_Form/web/Web" />
+    </root>
+  </artifact>
+</component>
