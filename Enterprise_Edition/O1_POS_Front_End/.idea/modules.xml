@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../O1_POS_Front_End.iml" filepath="$PROJECT_DIR$/../O1_POS_Front_End.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../O2_App/O2_App.iml" filepath="$PROJECT_DIR$/../O2_App/O2_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O2_Hello_JavaEE/O2_Hello_JavaEE.iml" filepath="$PROJECT_DIR$/../O2_Hello_JavaEE/O2_Hello_JavaEE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../O3_App/O3_App.iml" filepath="$PROJECT_DIR$/../O3_App/O3_App.iml" />
     </modules>
   </component>
 </project>
