@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/../O2_Hello_JavaEE/O2_Hello_JavaEE.iml" filepath="$PROJECT_DIR$/../O2_Hello_JavaEE/O2_Hello_JavaEE.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O3_App/O3_App.iml" filepath="$PROJECT_DIR$/../O3_App/O3_App.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O4_Contact_Form/O4_Contact_Form.iml" filepath="$PROJECT_DIR$/../O4_Contact_Form/O4_Contact_Form.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../O5_Mapping_Spec/O5_Mapping_Spec.iml" filepath="$PROJECT_DIR$/../O5_Mapping_Spec/O5_Mapping_Spec.iml" />
     </modules>
   </component>
 </project>
