@@ -14,6 +14,8 @@
 </head>
 <body>
 <%
+
+
     ArrayList<CustomerDTO> allCustomers = new ArrayList();
     allCustomers.add(new CustomerDTO("C001", "Iman", "India"));
     allCustomers.add(new CustomerDTO("C002", "Achintha", "Sri Lanka"));
@@ -32,7 +34,13 @@
     </tr>
     </thead>
     <tbody>
-
+    <%for (CustomerDTO customer : allCustomers) { %>
+    <tr>
+        <td><%=customer.getId()%></td>
+        <td><%=customer.getName()%></td>
+        <td><%=customer.getAddress()%></td>
+    </tr>
+    <%}%>
     </tbody>
 </table>
 
