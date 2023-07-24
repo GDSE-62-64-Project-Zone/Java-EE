@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--    http:://localhost:8080/pos_one/pages/customer.html-->
+<!--    http:://localhost:8080/pos_one/pages/customer.jsp-->
 <!--    http:://localhost:8080/pos_one/pages/customer-->
 
 <!--    http:://localhost:8080/pos_one/pages/customer-->
@@ -23,11 +23,11 @@
 <header class="jumbotron bg-primary text-white p-3">
     <h1 class="position-absolute" id="nav"></h1>
     <ul class="list-group list-group-horizontal text-danger justify-content-end font-weight-bold">
-        <li class="list-group-item bg-white" id="lnkHome"><a href="../index.html">Home</a></li>
-        <li class="list-group-item bg-danger text-white" id="lnkCustomer"><a class="text-white" href="customer.html">Customer</a>
+        <li class="list-group-item bg-white" id="lnkHome"><a href="../index.jsp">Home</a></li>
+        <li class="list-group-item bg-danger text-white" id="lnkCustomer"><a class="text-white" href="customer.jsp">Customer</a>
         </li>
-        <li class="list-group-item bg-white" id="lnkItem"><a href="item.html">Item</a></li>
-        <li class="list-group-item bg-white" id="lnkOrders"><a href="purchase-order.html">Orders</a></li>
+        <li class="list-group-item bg-white" id="lnkItem"><a href="item.jsp">Item</a></li>
+        <li class="list-group-item bg-white" id="lnkOrders"><a href="purchase-order.jsp">Orders</a></li>
     </ul>
 </header>
 
