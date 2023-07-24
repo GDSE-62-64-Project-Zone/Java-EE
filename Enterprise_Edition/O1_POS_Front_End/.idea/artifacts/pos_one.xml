@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="pos_one">
+    <output-path>$PROJECT_DIR$/out/artifacts/pos_one</output-path>
+    <root id="archive" name="pos_one.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="O6_POS_APP" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="O6_POS_APP/web/Web" />
+    </root>
+  </artifact>
+</component>
