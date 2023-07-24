@@ -1,11 +1,13 @@
+<%@ page import="lk.ijse.jsp.dto.CustomerDTO" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--    http:://localhost:8080/pos_one/pages/customer.jsp-->
-<!--    http:://localhost:8080/pos_one/pages/customer-->
+    <!--    http:://localhost:8080/pos_one/pages/customer.jsp-->
+    <!--    http:://localhost:8080/pos_one/pages/customer-->
 
-<!--    http:://localhost:8080/pos_one/pages/customer-->
+    <!--    http:://localhost:8080/pos_one/pages/customer-->
     <meta charset="UTF-8">
     <title>Customer Manage</title>
     <meta content="width=device-width initial-scale=1" name="viewport">
@@ -40,7 +42,7 @@
             <form>
                 <div class="form-group">
                     <label for="txtCustomerID">Customer ID</label>
-                    <input name="cusID" class="form-control" id="txtCustomerID"  type="text">
+                    <input name="cusID" class="form-control" id="txtCustomerID" type="text">
                     <span class="control-error" id="lblcusid"></span>
                 </div>
                 <div class="form-group">
@@ -59,9 +61,15 @@
                     <span class="control-error" id="lblcussalary"></span>
                 </div>
                 <div class="btn-group">
-                    <button formaction="customer?option=add" formmethod="post" class="btn btn-primary" id="btnCustomer">Save Customer</button>
-                    <button formaction="customer?option=delete" formmethod="post" class="btn btn-danger" id="btnCusDelete">Remove</button>
-                    <button formaction="customer?option=update" formmethod="post" class="btn btn-warning" id="btnUpdate">Update</button>
+                    <button formaction="customer?option=add" formmethod="post" class="btn btn-primary" id="btnCustomer">
+                        Save Customer
+                    </button>
+                    <button formaction="customer?option=delete" formmethod="post" class="btn btn-danger"
+                            id="btnCusDelete">Remove
+                    </button>
+                    <button formaction="customer?option=update" formmethod="post" class="btn btn-warning"
+                            id="btnUpdate">Update
+                    </button>
                     <button formaction="customer" class="btn btn-success" id="btnGetAll">Get All</button>
                     <button formaction="/pos_one" class="btn btn-danger" id="btn-clear1">Clear All</button>
                 </div>
@@ -78,7 +86,9 @@
                 </tr>
                 </thead>
                 <tbody id="tblCustomer">
-
+                <%
+                    ArrayList<CustomerDTO> allCustomers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");
+                %>
                 </tbody>
             </table>
         </div>

@@ -43,7 +43,7 @@ public class CustomerServlet extends HttpServlet {
 
             req.setAttribute("keyOne", allCustomers);
 
-            req.getRequestDispatcher("/jsp/pages/customer.jsp").forward(req, resp);
+            req.getRequestDispatcher("customer.jsp").forward(req, resp);
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
