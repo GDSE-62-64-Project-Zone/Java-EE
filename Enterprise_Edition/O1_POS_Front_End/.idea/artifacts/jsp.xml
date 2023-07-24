@@ -1,9 +1,9 @@
 <component name="ArtifactManager">
-  <artifact type="ear" name="jsp">
+  <artifact type="war" name="jsp">
     <output-path>$PROJECT_DIR$/out/artifacts/jsp</output-path>
-    <root id="archive" name="jsp.ear">
-      <element id="directory" name="lib">
-        <element id="archive" name="O7_JSP.jar">
+    <root id="archive" name="jsp.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
           <element id="module-output" name="O7_JSP" />
         </element>
       </element>
