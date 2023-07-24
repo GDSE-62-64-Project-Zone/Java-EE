@@ -39,7 +39,7 @@
             <form>
                 <div class="form-group">
                     <label for="txtCustomerID">Customer ID</label>
-                    <input name="cusID" class="form-control" id="txtCustomerID" required type="text">
+                    <input name="cusID" class="form-control" id="txtCustomerID"  type="text">
                     <span class="control-error" id="lblcusid"></span>
                 </div>
                 <div class="form-group">
@@ -59,10 +59,10 @@
                 </div>
                 <div class="btn-group">
                     <button formaction="customer?option=add" formmethod="post" class="btn btn-primary" id="btnCustomer">Save Customer</button>
-                    <button class="btn btn-danger" id="btnCusDelete">Remove</button>
-                    <button class="btn btn-warning" id="btnUpdate">Update</button>
-                    <button class="btn btn-success" id="btnGetAll">Get All</button>
-                    <button class="btn btn-danger" id="btn-clear1">Clear All</button>
+                    <button formaction="customer?option=delete" formmethod="post" class="btn btn-danger" id="btnCusDelete">Remove</button>
+                    <button formaction="customer?option=update" formmethod="post" class="btn btn-warning" id="btnUpdate">Update</button>
+                    <button formaction="customer" class="btn btn-success" id="btnGetAll">Get All</button>
+                    <button formaction="/pos_one" class="btn btn-danger" id="btn-clear1">Clear All</button>
                 </div>
             </form>
         </div>

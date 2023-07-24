@@ -66,40 +66,48 @@ public class CustomerServlet extends HttpServlet {
         String cusAddress = req.getParameter("cusAddress");
         String cusSalary = req.getParameter("cusSalary");
         String option = req.getParameter("option");
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
+
+
         switch (option) {
             case "add":
-                System.out.println("Add Invoked");
+                PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?)");
+                pstm.setObject(1, cusID);
+                pstm.setObject(2, cusName);
+                pstm.setObject(3, cusAddress);
+                if (pstm.executeUpdate() > 0) {
+                    resp.getWriter().println("Customer Added..!");
+                    resp.sendRedirect("customer");
+                }
                 break;
             case "delete":
-                System.out.println("Delete Invoked");
+                PreparedStatement pstm2 = connection.prepareStatement("delete from Customer where id=?");
+                pstm2.setObject(1, cusID);
+                if (pstm2.executeUpdate() > 0) {
+                    resp.getWriter().println("Customer Deleted..!");
+                    resp.sendRedirect("/pos_one/pages/customer.html");
+                }
                 break;
             case "update":
-                System.out.println("Update Invoked");
+                PreparedStatement pstm3 = connection.prepareStatement("update Customer set name=?,address=? where id=?");
+                pstm3.setObject(3, cusID);
+                pstm3.setObject(1, cusName);
+                pstm3.setObject(2, cusAddress);
+                if (pstm3.executeUpdate() > 0) {
+                    resp.getWriter().println("Customer Updated..!");
+                    resp.sendRedirect("/pos_one/pages/customer.html");
+                }
                 break;
         }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
-        // We want to register a customer
-        //We want to delete a customer
-        //We want to update a customer
 
-//        System.out.println(cusID+" "+cusName+" "+cusAddress+" "+cusSalary);
-//
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
-//            PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?)");
-//            pstm.setObject(1,cusID);
-//            pstm.setObject(2,cusName);
-//            pstm.setObject(3,cusAddress);
-//            if (pstm.executeUpdate()>0) {
-//                resp.getWriter().println("Customer Added..!");
-//                resp.sendRedirect("customer");
-//            }
-//
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 }
