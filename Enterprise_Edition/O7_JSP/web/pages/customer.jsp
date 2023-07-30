@@ -86,9 +86,7 @@
                 </tr>
                 </thead>
                 <tbody id="tblCustomer">
-                <%
-                    ArrayList<CustomerDTO> allCustomers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");
-                %>
+                <%ArrayList<CustomerDTO> allCustomers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");%>
                 </tbody>
             </table>
         </div>
