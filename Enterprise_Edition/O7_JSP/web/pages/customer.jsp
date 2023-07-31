@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--    http:://localhost:8080/pos_one/pages/customer.jsp-->
+    <!--    http:://localhost:8080/pos_one/pages/test-customer.jsp-->
     <!--    http:://localhost:8080/pos_one/pages/customer-->
 
     <!--    http:://localhost:8080/pos_one/pages/customer-->

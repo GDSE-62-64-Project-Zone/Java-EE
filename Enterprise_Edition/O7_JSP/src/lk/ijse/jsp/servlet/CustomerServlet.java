@@ -39,7 +39,7 @@ public class CustomerServlet extends HttpServlet {
                 allCustomers.add(new CustomerDTO(id, name, address));
             }
 
-//            resp.sendRedirect("/jsp/pages/customer.jsp");
+//            resp.sendRedirect("/jsp/pages/test-customer.jsp");
 
             req.setAttribute("keyOne", allCustomers);
 
