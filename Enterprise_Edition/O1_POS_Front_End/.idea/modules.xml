@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../O10_DBCP/O10_DBCP.iml" filepath="$PROJECT_DIR$/../O10_DBCP/O10_DBCP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../O11_Listener/O11_Listener.iml" filepath="$PROJECT_DIR$/../O11_Listener/O11_Listener.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../O12_Filters/O12_Filters.iml" filepath="$PROJECT_DIR$/../O12_Filters/O12_Filters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../O13_Inbuild_CP/O13_Inbuild_CP.iml" filepath="$PROJECT_DIR$/../O13_Inbuild_CP/O13_Inbuild_CP.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O1_POS_Front_End.iml" filepath="$PROJECT_DIR$/../O1_POS_Front_End.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O2_Hello_JavaEE/O2_Hello_JavaEE.iml" filepath="$PROJECT_DIR$/../O2_Hello_JavaEE/O2_Hello_JavaEE.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O3_App/O3_App.iml" filepath="$PROJECT_DIR$/../O3_App/O3_App.iml" />
@@ -10,6 +14,7 @@
       <module fileurl="file://$PROJECT_DIR$/../O6_POS_APP/O6_POS_APP.iml" filepath="$PROJECT_DIR$/../O6_POS_APP/O6_POS_APP.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O7_JSP/O7_JSP.iml" filepath="$PROJECT_DIR$/../O7_JSP/O7_JSP.iml" />
       <module fileurl="file://$PROJECT_DIR$/../O8_AJAX.iml" filepath="$PROJECT_DIR$/../O8_AJAX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../O9_JsonP/O9_JsonP.iml" filepath="$PROJECT_DIR$/../O9_JsonP/O9_JsonP.iml" />
     </modules>
   </component>
 </project>

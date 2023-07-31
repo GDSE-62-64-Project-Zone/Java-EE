@@ -82,11 +82,26 @@
                     <th>Customer ID</th>
                     <th>Customer Name</th>
                     <th>Customer Address</th>
-                    <th>Customer Salary</th>
                 </tr>
                 </thead>
                 <tbody id="tblCustomer">
-                <%ArrayList<CustomerDTO> allCustomers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");%>
+                <%
+                    ArrayList<CustomerDTO> allCustomers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");
+                    if (allCustomers != null) {
+                %>
+                <%for (CustomerDTO customer : allCustomers) { %>
+                <tr>
+                    <td><%=customer.getId()%>
+                    </td>
+                    <td><%=customer.getName()%>
+                    </td>
+                    <td><%=customer.getAddress()%>
+                    </td>
+                </tr>
+                <%
+                        }
+                    }
+                %>
                 </tbody>
             </table>
         </div>
