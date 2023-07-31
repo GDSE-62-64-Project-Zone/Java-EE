@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//if you wanted to map several url patterns with the same servlet then you can use this
 @WebServlet(urlPatterns = {"/a","/b","/c"})
 public class MultipleMapping extends HttpServlet {
     @Override

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//if you wanted to map /all and then any path more path, then you can use while card mapping
 //dall/jadijwij/jandjawd/jandjawnd/jndwajnjawd
 
 @WebServlet(urlPatterns = "/all/*")

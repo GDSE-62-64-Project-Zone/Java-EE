@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+//if you request any path with .txt extension then this servlet will invoke
 @WebServlet(urlPatterns = "*.txt")
 public class ExtensionMapping extends HttpServlet {
     @Override

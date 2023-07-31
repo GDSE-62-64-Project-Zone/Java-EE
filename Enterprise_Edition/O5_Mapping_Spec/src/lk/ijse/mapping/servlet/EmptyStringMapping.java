@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+//if you input only the appname and enter this will execute
 @WebServlet(urlPatterns = "")
 public class EmptyStringMapping extends HttpServlet {
     @Override

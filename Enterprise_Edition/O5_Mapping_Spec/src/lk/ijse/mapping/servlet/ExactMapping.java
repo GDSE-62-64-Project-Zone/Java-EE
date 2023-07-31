@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//if you enter /exact and request then this will invoke
 @WebServlet(urlPatterns = "/exact")
 public class ExactMapping  extends HttpServlet {
     @Override

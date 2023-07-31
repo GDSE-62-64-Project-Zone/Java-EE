@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//If there is no maching available for any  mapping all the request will
+//go thorough this
 @WebServlet (urlPatterns = "/")
 public class DefaultMapping extends HttpServlet {
     @Override
