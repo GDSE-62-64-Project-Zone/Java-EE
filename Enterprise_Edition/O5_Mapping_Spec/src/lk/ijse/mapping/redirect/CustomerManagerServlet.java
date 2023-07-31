@@ -11,6 +11,11 @@ import java.io.IOException;
 public class CustomerManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        System.out.println(id);
         System.out.println("Customer Manager Get Request Received");
+        resp.getWriter().write("Customer Manager Get Request Received");
+//        resp.sendRedirect("itemManager");
+        req.getRequestDispatcher("itemManager").forward(req,resp);
     }
 }

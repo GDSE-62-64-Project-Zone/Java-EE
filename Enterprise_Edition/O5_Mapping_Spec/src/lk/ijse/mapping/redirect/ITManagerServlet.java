@@ -11,6 +11,9 @@ import java.io.IOException;
 public class ITManagerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        System.out.println(id);
         System.out.println("Item Manager Get Request Received");
+        resp.getWriter().write("Item Manager Get Request Received");
     }
 }

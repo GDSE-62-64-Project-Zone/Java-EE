@@ -39,8 +39,6 @@ public class CustomerServlet extends HttpServlet {
                 allCustomers.add(new CustomerDTO(id, name, address));
             }
 
-//            resp.sendRedirect("/jsp/pages/test-customer.jsp");
-
             req.setAttribute("keyOne", allCustomers);
 
             req.getRequestDispatcher("customer.jsp").forward(req, resp);
@@ -82,7 +80,7 @@ public class CustomerServlet extends HttpServlet {
                     pstm2.setObject(1, cusID);
                     if (pstm2.executeUpdate() > 0) {
                         resp.getWriter().println("Customer Deleted..!");
-                        resp.sendRedirect("/pos_one/pages/customer.html");
+                        resp.sendRedirect("/jsp/pages/customer.html");
                     }
                     break;
                 case "update":
@@ -92,7 +90,7 @@ public class CustomerServlet extends HttpServlet {
                     pstm3.setObject(2, cusAddress);
                     if (pstm3.executeUpdate() > 0) {
                         resp.getWriter().println("Customer Updated..!");
-                        resp.sendRedirect("/pos_one/pages/customer.html");
+                        resp.sendRedirect("/jsp/pages/customer.html");
                     }
                     break;
             }
