@@ -1,6 +1,5 @@
 package lk.ijse.jsp.servlet;
 
-import lk.ijse.jsp.dto.CustomerDTO;
 import lk.ijse.jsp.dto.ItemDTO;
 
 import javax.servlet.ServletException;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+
 @WebServlet(urlPatterns = "/pages/item")
 public class ItemServlet extends HttpServlet {
 
@@ -29,7 +29,7 @@ public class ItemServlet extends HttpServlet {
                 String name = rst.getString(2);
                 int qtyOnHand = rst.getInt(3);
                 double unitPrice = rst.getDouble(4);
-                allItems.add(new ItemDTO(code, name, qtyOnHand,unitPrice));
+                allItems.add(new ItemDTO(code, name, qtyOnHand, unitPrice));
             }
 
             req.setAttribute("keyTwo", allItems);
@@ -56,8 +56,6 @@ public class ItemServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
-
-
             switch (option) {
                 case "add":
                     PreparedStatement pstm = connection.prepareStatement("insert into Item values(?,?,?,?)");
@@ -95,7 +93,5 @@ public class ItemServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
