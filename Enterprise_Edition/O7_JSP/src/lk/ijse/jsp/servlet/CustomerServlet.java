@@ -19,7 +19,7 @@ import java.util.ArrayList;
 //http:://localhost:8080/pos_one/pages/customer
 //http:://localhost:8080/pos_one/pages/customer
 
-@WebServlet(urlPatterns = "/pages/customer")
+@WebServlet(urlPatterns = {"/pages/customer"})
 public class CustomerServlet extends HttpServlet {
 
     @Override
@@ -63,7 +63,6 @@ public class CustomerServlet extends HttpServlet {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
 
-
             switch (option) {
                 case "add":
                     PreparedStatement pstm = connection.prepareStatement("insert into Customer values(?,?,?)");
@@ -72,7 +71,6 @@ public class CustomerServlet extends HttpServlet {
                     pstm.setObject(3, cusAddress);
                     if (pstm.executeUpdate() > 0) {
                         resp.getWriter().println("Customer Added..!");
-                        resp.sendRedirect("customer");
                     }
                     break;
                 case "delete":
@@ -80,7 +78,6 @@ public class CustomerServlet extends HttpServlet {
                     pstm2.setObject(1, cusID);
                     if (pstm2.executeUpdate() > 0) {
                         resp.getWriter().println("Customer Deleted..!");
-                        resp.sendRedirect("/jsp/pages/customer.html");
                     }
                     break;
                 case "update":
@@ -90,10 +87,12 @@ public class CustomerServlet extends HttpServlet {
                     pstm3.setObject(2, cusAddress);
                     if (pstm3.executeUpdate() > 0) {
                         resp.getWriter().println("Customer Updated..!");
-                        resp.sendRedirect("/jsp/pages/customer.html");
                     }
                     break;
             }
+
+            resp.sendRedirect("/jsp/pages/customer");
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
