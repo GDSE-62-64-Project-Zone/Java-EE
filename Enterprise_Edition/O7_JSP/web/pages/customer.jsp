@@ -22,6 +22,9 @@
     </style>
 </head>
 <body>
+<%--<%--%>
+<%--response.sendRedirect("customer");--%>
+<%--%>--%>
 <!--header-->
 <header class="jumbotron bg-primary text-white p-3">
     <h1 class="position-absolute" id="nav"></h1>
