@@ -47,7 +47,7 @@
             <button id="btn2" class="btn btn-success">Send Request</button>
         </div>
         <div class="col-md-10">
-            <table class="table table-warning bg-warning table-bordered table-hover">
+            <table class="table  table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -59,6 +59,11 @@
                 <tbody id="tb2">
 
                 </tbody>
+                <footer>
+                    <tr id="loader">
+                        <td colspan="4">Loading..!  <img src="assests/img/loader.gif" width="100" alt=""></td>
+                    </tr>
+                </footer>
             </table>
         </div>
     </div>
@@ -98,9 +103,11 @@
 
     $("#btn2").click(function(){
         $("#tb2").empty();
+        $("#loader").fadeIn(1);
         $.ajax({
             url:'localDB/db.xml',
             success:function (res){
+                $("#loader").fadeOut(1000);
                 let customers=$(res).children().children();
                 for (let i = 0; i < customers.length; i++) {
                     let customer=customers.eq(i);
