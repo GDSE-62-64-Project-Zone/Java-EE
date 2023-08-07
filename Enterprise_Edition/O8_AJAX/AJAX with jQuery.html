@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax with jQuery</title>
+    <link rel="stylesheet" href="assests/css/bootstrap.min.css">
+</head>
+<body>
+
+<section class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-2">
+            <button id="btn" class="btn btn-danger">Send Request</button>
+        </div>
+        <div class="col-md-10">
+            <h1 id="display">This is yet to be changed.!</h1>
+        </div>
+    </div>
+</section>
+
+
+<script src="assests/js/jquery-3.7.0.min.js"></script>
+<script>
+
+    //    $("#display");
+
+    $("#btn").click(function () {
+
+        $.ajax({
+            url: 'localDB/db.txt',
+            success:function(res){
+                console.log(res);
+                $("#display").text(res);
+            },
+            error:function(e){
+                console.log('error invoked',e);
+            }
+        });
+
+    });
+
+</script>
+</body>
+</html>

@@ -24,8 +24,8 @@
     let display = document.getElementById("display");
     let btn = document.getElementById("btn");
 
-    btn.addEventListener("click", function () {
 
+    btn.addEventListener("click", function () {
         //initializing the ajax object
         let http = new XMLHttpRequest();
 
@@ -37,11 +37,10 @@
 
         //bind the on ready state event
         http.onreadystatechange=function (){
-            if (http.readyState == 4) {
+            if (http.readyState == 4 && http.status==200) {
                 display.innerText = http.responseText;
             }
         }
-
     });
 
 </script>
