@@ -22,7 +22,7 @@
             <button id="btn1" class="btn btn-primary">Send Request</button>
         </div>
         <div class="col-md-10">
-            <table class="table table-bordered table-hover">
+            <table class="table table-danger table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -31,7 +31,7 @@
                     <th>TP</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="tb1">
 
                 </tbody>
             </table>
@@ -39,29 +39,35 @@
     </div>
 </section>
 
-
+<script src="assests/js/jquery-3.7.0.min.js"></script>
 <script>
 
-    let display = document.getElementById("display");
-    let btn = document.getElementById("btn");
-
-
-    btn.addEventListener("click", function () {
-        //initializing the ajax object
-        let http = new XMLHttpRequest();
-
-        //loading the request
-        http.open("get","localDB/db.txt");
-
-        //send the request
-        http.send();
-
-        //bind the on ready state event
-        http.onreadystatechange=function (){
-            if (http.readyState == 4 && http.status==200) {
-                display.innerText = http.responseText;
+    //first event with js to read a file
+    $("#btn").click(function () {
+        $.ajax({
+            url: 'localDB/db.txt',
+            success:function(res){
+                console.log(res);
+                $("#display").text(res);
+            },
+            error:function(e){
+                console.log('error invoked',e);
             }
-        }
+        });
+    });
+
+
+    //second event to read a file and load data to the table
+    $("#btn1").click(function (){
+        $.ajax({
+            url:"localDB/customer.txt",
+            success:function (res){
+              let data=res.split(" ");
+
+                let tr=`<tr><td>${data[0]}</td><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td></tr>`;
+                $('#tb1').append(tr);
+            }
+        });
     });
 
 </script>
