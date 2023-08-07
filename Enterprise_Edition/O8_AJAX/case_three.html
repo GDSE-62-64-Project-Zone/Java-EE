@@ -41,13 +41,13 @@
     </div>
 
 
-    <h1>XML format with Ajax</h1>
+    <h1 class="mt-5">XML format with Ajax</h1>
     <div class="row mt-5">
         <div class="col-md-2">
             <button id="btn2" class="btn btn-success">Send Request</button>
         </div>
         <div class="col-md-10">
-            <table class="table table-danger table-bordered table-hover">
+            <table class="table table-warning bg-warning table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -91,6 +91,31 @@
 
                 let tr = `<tr><td>${data[0]}</td><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td></tr>`;
                 $('#tb1').append(tr);
+            }
+        });
+    });
+
+
+    $("#btn2").click(function(){
+        $("#tb2").empty();
+        $.ajax({
+            url:'localDB/db.xml',
+            success:function (res){
+                let customers=$(res).children().children();
+                for (let i = 0; i < customers.length; i++) {
+                    let customer=customers.eq(i);
+                    let c_details=customer.children();
+
+                    let id=c_details.eq(0).text();
+                    let name=c_details.eq(1).text();
+                    let address=c_details.eq(2).text();
+                    let tp=c_details.eq(3).text();
+
+                    let row=`<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${tp}</td></tr>`;
+                    $("#tb2").append(row);
+                }
+
+
             }
         });
     });
