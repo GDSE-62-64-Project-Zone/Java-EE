@@ -7,5 +7,33 @@
 </head>
 <body>
 
+<form action="customer">
+    <input name="id" type="text" placeholder="Custoemr ID">
+    <button type="button" onclick="sendRequest()">Send</button>
+</form>
+
+
+<script>
+    function sendRequest() {
+        console.log("Before Request Send")
+        let http = new XMLHttpRequest();
+        http.open("GET", "localDB/db.txt",false);
+        // http.onreadystatechange=function (){
+        //
+        // }
+        http.send();
+        console.log(http.responseText);
+        console.log("After Request Processed");
+    }
+
+    console.log("Before Time out") //1
+
+    setTimeout(function (){
+        console.log("To be invoked after 5000")
+    },5000); //3
+
+    console.log("After Time out")//2
+
+</script>
 </body>
 </html>
