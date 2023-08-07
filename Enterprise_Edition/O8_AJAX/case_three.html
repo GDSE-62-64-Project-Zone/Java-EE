@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX File Processing</title>
+    <link rel="stylesheet" href="assests/css/bootstrap.min.css">
+</head>
+<body>
+
+<h1>File Request</h1>
+<section class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-2">
+            <button id="btn" class="btn btn-danger">Send Request</button>
+        </div>
+        <div class="col-md-10">
+            <h1 id="display">This is yet to be changed.!</h1>
+        </div>
+    </div>
+
+
+    <div class="row mt-5">
+        <div class="col-md-2">
+            <button id="btn1" class="btn btn-primary">Send Request</button>
+        </div>
+        <div class="col-md-10">
+            <table class="table table-danger table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>TP</th>
+                </tr>
+                </thead>
+                <tbody id="tb1">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <h1>XML format with Ajax</h1>
+    <div class="row mt-5">
+        <div class="col-md-2">
+            <button id="btn2" class="btn btn-success">Send Request</button>
+        </div>
+        <div class="col-md-10">
+            <table class="table table-danger table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>TP</th>
+                </tr>
+                </thead>
+                <tbody id="tb2">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script src="assests/js/jquery-3.7.0.min.js"></script>
+<script>
+
+    //first event with js to read a file
+    $("#btn").click(function () {
+        $.ajax({
+            url: 'localDB/db.txt',
+            success: function (res) {
+                console.log(res);
+                $("#display").text(res);
+            },
+            error: function (e) {
+                console.log('error invoked', e);
+            }
+        });
+    });
+
+
+    //second event to read a file and load data to the table
+    $("#btn1").click(function () {
+        $.ajax({
+            url: "localDB/customer.txt",
+            success: function (res) {
+                let data = res.split(" ");
+
+                let tr = `<tr><td>${data[0]}</td><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td></tr>`;
+                $('#tb1').append(tr);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
