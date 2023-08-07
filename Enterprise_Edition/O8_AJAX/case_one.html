@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX File Processing</title>
+    <link rel="stylesheet" href="assests/css/bootstrap.min.css">
+</head>
+<body>
+
+<section class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-2">
+            <button id="btn" class="btn btn-danger">Send Request</button>
+        </div>
+        <div class="col-md-10">
+            <h1 id="display">This is yet to be changed.!</h1>
+        </div>
+    </div>
+</section>
+
+
+<script>
+
+    let display = document.getElementById("display");
+    let btn = document.getElementById("btn");
+
+    btn.addEventListener("click", function () {
+
+        //initializing the ajax object
+        let http = new XMLHttpRequest();
+
+        //loading the request
+        http.open("get","localDB/db.txt");
+
+        //send the request
+        http.send();
+
+        //bind the on ready state event
+        http.onreadystatechange=function (){
+            if (http.readyState == 4) {
+                display.innerText = http.responseText;
+            }
+        }
+
+    });
+
+</script>
+</body>
+</html>
