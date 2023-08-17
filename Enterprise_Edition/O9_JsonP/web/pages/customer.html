@@ -21,7 +21,8 @@
     <h1 class="position-absolute" id="nav"></h1>
     <ul class="list-group list-group-horizontal text-danger justify-content-end font-weight-bold">
         <li class="list-group-item bg-white" id="lnkHome"><a href="../index.jsp">Home</a></li>
-        <li class="list-group-item bg-danger text-white" id="lnkCustomer"><a class="text-white" href="/jsonp/pages/customer">Customer</a>
+        <li class="list-group-item bg-danger text-white" id="lnkCustomer"><a class="text-white"
+                                                                             href="/jsonp/pages/customer">Customer</a>
         </li>
         <li class="list-group-item bg-white" id="lnkItem"><a href="/jsonp/pages/item">Item</a></li>
         <li class="list-group-item bg-white" id="lnkOrders"><a href="purchase-order.jsp">Orders</a></li>
@@ -64,7 +65,7 @@
                     <button formaction="customer?option=update" formmethod="post" class="btn btn-warning"
                             id="btnUpdate">Update
                     </button>
-                    <button  type="button" class="btn btn-success" id="btnGetAll">Get All</button>
+                    <button type="button" class="btn btn-success" id="btnGetAll">Get All</button>
                     <button formaction="/pos_one" class="btn btn-danger" id="btn-clear1">Clear All</button>
                 </div>
             </form>
@@ -93,13 +94,23 @@
 
 <!--bind a event on btn GetAll btn-->
 <script>
-    $("#btnGetAll").click(function(){
-
+    $("#btnGetAll").click(function () {
+        $("#tblCustomer").empty();
         <!--send ajax request to the customer servlet using jQuery-->
         $.ajax({
-            url:'customer',
-            success:function (resp){
-                console.log(resp);
+            url: 'customer',
+            success: function (customers) {
+                for (let i in customers) {
+                    let cus = customers[i];
+                    let id = cus.id;
+                    let name = cus.name;
+                    let address = cus.address;
+                    let row=`<tr><td>${id}</td><td>${name}</td><td>${address}</td></tr>`;
+                    $("#tblCustomer").append(row);
+                }
+            },
+            error:function(error){
+                console.log(error);
             }
         });
 

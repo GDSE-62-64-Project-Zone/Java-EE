@@ -39,9 +39,7 @@ public class CustomerServlet extends HttpServlet {
             json=json+"]";
 
             resp.getWriter().print(json.substring(0,json.length()-2)+"]");
-            // create a json response including customer data
-            // String s= "[{id:""}]";
-            //send the output through the ajax response
+
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
