@@ -34,7 +34,7 @@
     <section class="row">
         <div class="col-12 col-lg-4">
             <h1>Customer Registration</h1>
-            <form>
+            <form id="customerForm">
                 <div class="form-group">
                     <label for="txtCustomerID">Customer ID</label>
                     <input name="cusID" class="form-control" id="txtCustomerID" type="text">
@@ -56,17 +56,17 @@
                     <span class="control-error" id="lblcussalary"></span>
                 </div>
                 <div class="btn-group">
-                    <button formaction="customer?option=add" formmethod="post" class="btn btn-primary" id="btnCustomer">
+                    <button  type="button" class="btn btn-primary" id="btnCustomer">
                         Save Customer
                     </button>
-                    <button formaction="customer?option=delete" formmethod="post" class="btn btn-danger"
+                    <button  type="button" class="btn btn-danger"
                             id="btnCusDelete">Remove
                     </button>
-                    <button formaction="customer?option=update" formmethod="post" class="btn btn-warning"
+                    <button  type="button" class="btn btn-warning"
                             id="btnUpdate">Update
                     </button>
                     <button type="button" class="btn btn-success" id="btnGetAll">Get All</button>
-                    <button formaction="/pos_one" class="btn btn-danger" id="btn-clear1">Clear All</button>
+                    <button  type="button" class="btn btn-danger" id="btn-clear1">Clear All</button>
                 </div>
             </form>
         </div>
@@ -94,11 +94,19 @@
 
 <!--bind a event on btn GetAll btn-->
 <script>
+
+    getAllCustomers();
+
     $("#btnGetAll").click(function () {
+        getAllCustomers();
+    });
+
+    function getAllCustomers(){
         $("#tblCustomer").empty();
         <!--send ajax request to the customer servlet using jQuery-->
         $.ajax({
             url: 'customer',
+            dataType:"json",
             success: function (customers) {
                 for (let i in customers) {
                     let cus = customers[i];
@@ -113,7 +121,43 @@
                 console.log(error);
             }
         });
+    }
 
+    $("#btnCustomer").click(function (){
+        let formData=$("#customerForm").serialize();
+        $.ajax({
+            url:"customer?option=add",
+            method:"post",
+            data:formData,
+            success:function (){
+                getAllCustomers();
+            }
+        });
+
+    });
+
+    $("#btnCusDelete").click(function(){
+        let formData=$("#customerForm").serialize();
+        $.ajax({
+            url:'customer?option=delete',
+            method:'post',
+            data:formData,
+            success:function (resp){
+                getAllCustomers();
+            }
+        });
+    });
+
+    $("#btnUpdate").click(function (){
+        let formData=$("#customerForm").serialize();
+        $.ajax({
+            url:'customer?option=update',
+            method:'post',
+            data:formData,
+            success:function (resp){
+                getAllCustomers();
+            }
+        });
     });
 </script>
 

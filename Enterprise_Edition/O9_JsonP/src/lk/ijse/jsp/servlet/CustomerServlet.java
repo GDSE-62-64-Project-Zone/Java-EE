@@ -1,7 +1,8 @@
 package lk.ijse.jsp.servlet;
 
-import lk.ijse.jsp.dto.CustomerDTO;
-
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 
 
 @WebServlet(urlPatterns = {"/pages/customer"})
@@ -22,23 +22,38 @@ public class CustomerServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet rst = pstm.executeQuery();
-            resp.addHeader("Content-Type","application/json");
+//            resp.addHeader("Content-Type", "application/json");
 
-            String json="[";
+//            String json="[";
+//            while (rst.next()) {
+//                String customer="{";
+//                String id = rst.getString(1);
+//                String name = rst.getString(2);
+//                String address = rst.getString(3);
+//                customer+="\"id\":\""+id+"\",";
+//                customer+="\"name\":\""+name+"\",";
+//                customer+="\"address\":\""+address+"\"";
+//                customer+="},";
+//                json+=customer;
+//            }
+//            json=json+"]";
+//
+//            resp.getWriter().print(json.substring(0,json.length()-2)+"]");
+
+            JsonArrayBuilder allCustomers = Json.createArrayBuilder();
             while (rst.next()) {
-                String customer="{";
                 String id = rst.getString(1);
                 String name = rst.getString(2);
                 String address = rst.getString(3);
-                customer+="\"id\":\""+id+"\",";
-                customer+="\"name\":\""+name+"\",";
-                customer+="\"address\":\""+address+"\"";
-                customer+="},";
-                json+=customer;
-            }
-            json=json+"]";
 
-            resp.getWriter().print(json.substring(0,json.length()-2)+"]");
+                JsonObjectBuilder customerObject = Json.createObjectBuilder();
+                customerObject.add("id",id);
+                customerObject.add("name",name);
+                customerObject.add("address",address);
+                allCustomers.add(customerObject.build());
+            }
+
+            resp.getWriter().print(allCustomers.build());
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -66,6 +81,7 @@ public class CustomerServlet extends HttpServlet {
                     pstm.setObject(1, cusID);
                     pstm.setObject(2, cusName);
                     pstm.setObject(3, cusAddress);
+
                     if (pstm.executeUpdate() > 0) {
                         resp.getWriter().println("Customer Added..!");
                     }
@@ -88,7 +104,6 @@ public class CustomerServlet extends HttpServlet {
                     break;
             }
 
-            resp.sendRedirect("/jsonp/pages/customer");
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
