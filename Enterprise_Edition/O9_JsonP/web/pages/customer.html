@@ -1,13 +1,6 @@
-<%@ page import="lk.ijse.jsp.dto.CustomerDTO" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!--    http:://localhost:8080/pos_one/pages/test-customer.jsp-->
-    <!--    http:://localhost:8080/pos_one/pages/customer-->
-
-    <!--    http:://localhost:8080/pos_one/pages/customer-->
     <meta charset="UTF-8">
     <title>Customer Manage</title>
     <meta content="width=device-width initial-scale=1" name="viewport">
@@ -22,9 +15,7 @@
     </style>
 </head>
 <body>
-<%--<%--%>
-<%--response.sendRedirect("customer");--%>
-<%--%>--%>
+
 <!--header-->
 <header class="jumbotron bg-primary text-white p-3">
     <h1 class="position-absolute" id="nav"></h1>
@@ -88,23 +79,7 @@
                 </tr>
                 </thead>
                 <tbody id="tblCustomer">
-                <%
-                    ArrayList<CustomerDTO> allCustomers = (ArrayList<CustomerDTO>) request.getAttribute("keyOne");
-                    if (allCustomers != null) {
-                %>
-                <%for (CustomerDTO customer : allCustomers) { %>
-                <tr>
-                    <td><%=customer.getId()%>
-                    </td>
-                    <td><%=customer.getName()%>
-                    </td>
-                    <td><%=customer.getAddress()%>
-                    </td>
-                </tr>
-                <%
-                        }
-                    }
-                %>
+
                 </tbody>
             </table>
         </div>
@@ -115,56 +90,12 @@
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
 <script src="../assets/js/bootstrap.min.js"></script>
 
-<!--<script>-->
-<!--    //select the button and add an event to it-->
-<!--    document.getElementById("btnCustomer").addEventListener("click", function () {-->
 
-<!--        //get typed values of input fields-->
-<!--        let id = document.getElementById("txtCustomerID").value;-->
-<!--        let name = document.getElementById("txtCustomerName").value;-->
-<!--        let address = document.getElementById("txtCustomerAddress").value;-->
-<!--        let salary = document.getElementById("txtCustomerSalary").value;-->
+<!--bind a event on btn GetAll btn-->
+<!--send ajax request to the customer servlet using jQuery-->
 
-<!--        //let's print it-->
-<!--        console.log(id,name,address,salary);-->
+<!--when the response received catch it and set it to the table-->
 
-<!--        //catch the table body-->
-<!--        let tBody=document.getElementById("tblCustomer");-->
 
-<!--        // let's see how we should insert a table row using html format-->
-<!--        //<tr>-->
-<!--        // <td>id</td>-->
-<!--        // <td>name</td>-->
-<!--        // <td>address</td>-->
-<!--        // <td>salary</td>-->
-<!--        // </tr>-->
-
-<!--        //ok then, let's create the above row-->
-<!--       let tr= document.createElement("tr");-->
-
-<!--       //let's create another four columns-->
-<!--       let col1= document.createElement("td");-->
-<!--       let col2= document.createElement("td");-->
-<!--       let col3= document.createElement("td");-->
-<!--       let col4= document.createElement("td");-->
-
-<!--       //set input fields values to the above created columns-->
-<!--        col1.textContent=id;-->
-<!--        col2.textContent=name;-->
-<!--        col3.textContent=address;-->
-<!--        col4.textContent=salary;-->
-
-<!--        //set 4 columns to the previously created row-->
-<!--        tr.appendChild(col1);-->
-<!--        tr.appendChild(col2);-->
-<!--        tr.appendChild(col3);-->
-<!--        tr.appendChild(col4);-->
-
-<!--        //set the row to the table body-->
-<!--        tBody.appendChild(tr);-->
-
-<!--        //Work done;-->
-<!--    });-->
-<!--</script>-->
 </body>
 </html>

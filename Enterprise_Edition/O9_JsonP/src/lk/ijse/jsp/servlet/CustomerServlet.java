@@ -11,13 +11,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
-//http://localhost:8080/pos_one/customer
-//http://localhost:8080/pos_one/pages/customer? 404
-//http://localhost:8080/customer? 404
-
-//http://localhost:8080/pos_one/pages/customer//
-//http:://localhost:8080/pos_one/pages/customer
-//http:://localhost:8080/pos_one/pages/customer
 
 @WebServlet(urlPatterns = {"/pages/customer"})
 public class CustomerServlet extends HttpServlet {
@@ -38,11 +31,14 @@ public class CustomerServlet extends HttpServlet {
                 String address = rst.getString(3);
                 allCustomers.add(new CustomerDTO(id, name, address));
             }
+//
+//            req.setAttribute("keyOne", allCustomers);
+//
+//            req.getRequestDispatcher("customer.html").forward(req, resp);
 
-            req.setAttribute("keyOne", allCustomers);
-
-            req.getRequestDispatcher("customer.jsp").forward(req, resp);
-
+            // create a json response including customer data
+            // String s= "[{id:""}]";
+            //send the output through the ajax response
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
