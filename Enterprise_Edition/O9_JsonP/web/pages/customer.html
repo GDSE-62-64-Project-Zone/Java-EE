@@ -64,7 +64,7 @@
                     <button formaction="customer?option=update" formmethod="post" class="btn btn-warning"
                             id="btnUpdate">Update
                     </button>
-                    <button formaction="customer" class="btn btn-success" id="btnGetAll">Get All</button>
+                    <button  type="button" class="btn btn-success" id="btnGetAll">Get All</button>
                     <button formaction="/pos_one" class="btn btn-danger" id="btn-clear1">Clear All</button>
                 </div>
             </form>
@@ -92,7 +92,20 @@
 
 
 <!--bind a event on btn GetAll btn-->
-<!--send ajax request to the customer servlet using jQuery-->
+<script>
+    $("#btnGetAll").click(function(){
+
+        <!--send ajax request to the customer servlet using jQuery-->
+        $.ajax({
+            url:'customer',
+            success:function (resp){
+                console.log(resp);
+            }
+        });
+
+    });
+</script>
+
 
 <!--when the response received catch it and set it to the table-->
 

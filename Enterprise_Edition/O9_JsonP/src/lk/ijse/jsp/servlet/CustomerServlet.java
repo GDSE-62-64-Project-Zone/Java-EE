@@ -22,20 +22,23 @@ public class CustomerServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet rst = pstm.executeQuery();
+            resp.addHeader("Content-Type","application/json");
 
-            ArrayList<CustomerDTO> allCustomers = new ArrayList<>();
-
+            String json="[";
             while (rst.next()) {
+                String customer="{";
                 String id = rst.getString(1);
                 String name = rst.getString(2);
                 String address = rst.getString(3);
-                allCustomers.add(new CustomerDTO(id, name, address));
+                customer+="\"id\":\""+id+"\",";
+                customer+="\"name\":\""+name+"\",";
+                customer+="\"address\":\""+address+"\"";
+                customer+="},";
+                json+=customer;
             }
-//
-//            req.setAttribute("keyOne", allCustomers);
-//
-//            req.getRequestDispatcher("customer.html").forward(req, resp);
+            json=json+"]";
 
+            resp.getWriter().print(json.substring(0,json.length()-2)+"]");
             // create a json response including customer data
             // String s= "[{id:""}]";
             //send the output through the ajax response
