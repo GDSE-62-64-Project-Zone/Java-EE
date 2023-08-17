@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX File Processing</title>
+    <link rel="stylesheet" href="assests/css/bootstrap.min.css">
+    <style>
+        .c{
+            height: 400px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+
+<h1>File Request</h1>
+<section class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-2">
+            <button id="btn" class="btn btn-danger">Send Request</button>
+        </div>
+        <div class="col-md-10">
+            <h1 id="display">This is yet to be changed.!</h1>
+        </div>
+    </div>
+
+
+    <div class="row mt-5">
+        <div class="col-md-2">
+            <button id="btn1" class="btn btn-primary">Send Request</button>
+        </div>
+        <div class="col-md-10">
+            <table class="table table-danger table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>TP</th>
+                </tr>
+                </thead>
+                <tbody id="tb1">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <h1 class="mt-5">XML format with Ajax</h1>
+    <div class="row mt-5">
+        <div class="col-md-2">
+            <button id="btn2" class="btn btn-success">Send Request</button>
+        </div>
+        <div class="col-md-10 c">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>TP</th>
+                </tr>
+                </thead>
+                <tbody id="tb2">
+
+                </tbody>
+                <footer>
+                    <tr id="loader">
+                        <td colspan="4">Loading..! <img src="assests/img/loader.gif" width="100" alt=""></td>
+                    </tr>
+                </footer>
+            </table>
+        </div>
+    </div>
+
+
+    <h1 class="mt-5">JSON format with Ajax</h1>
+    <div class="row mt-5">
+        <div class="col-md-2">
+            <button id="btn3" class="btn btn-danger">Send Request</button>
+        </div>
+        <div class="col-md-10 c">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>TP</th>
+                </tr>
+                </thead>
+                <tbody id="tb3">
+
+                </tbody>
+                <footer>
+                    <tr id="loader2">
+                        <td colspan="4">Loading..! <img src="assests/img/loader.gif" width="100" alt=""></td>
+                    </tr>
+                </footer>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script src="assests/js/jquery-3.7.0.min.js"></script>
+<script>
+
+    //first event with js to read a file
+    $("#btn").click(function () {
+        $.ajax({
+            url: 'localDB/db.txt',
+            success: function (res) {
+                console.log(res);
+                $("#display").text(res);
+            },
+            error: function (e) {
+                console.log('error invoked', e);
+            }
+        });
+    });
+
+
+    //second event to read a file and load data to the table
+    $("#btn1").click(function () {
+        $.ajax({
+            url: "localDB/customer.txt",
+            success: function (res) {
+                let data = res.split(" ");
+
+                let tr = `<tr><td>${data[0]}</td><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td></tr>`;
+                $('#tb1').append(tr);
+            }
+        });
+    });
+
+
+    $("#btn2").click(function () {
+        $("#tb2").empty();
+        $("#loader").fadeIn(1);
+        $.ajax({
+            url: 'localDB/db.xml',
+            success: function (res) {
+                $("#loader").fadeOut(1000);
+                let customers = $(res).children().children();
+                for (let i = 0; i < customers.length; i++) {
+                    let customer = customers.eq(i);
+                    let c_details = customer.children();
+
+                    let id = c_details.eq(0).text();
+                    let name = c_details.eq(1).text();
+                    let address = c_details.eq(2).text();
+                    let tp = c_details.eq(3).text();
+
+                    let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${tp}</td></tr>`;
+                    $("#tb2").append(row);
+                }
+
+
+            }
+        });
+    });
+
+
+    //MANAGE JSON WITH AJAX
+    $("#btn3").click(function () {
+        $("#loader2").fadeIn(100);
+        $("#tb3").empty();
+        $.ajax({
+            url: "localDB/db.json",
+            success: function (res) {
+                $("#loader2").fadeOut(100);
+                for (let i in res) {
+                    let customer = res[i];
+                    let id = customer.id;
+                    let name = customer.name;
+                    let address = customer.address;
+                    let tp = customer.tp;
+
+                    let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td><td>${tp}</td></tr>`;
+                    $("#tb3").append(row);
+
+                }
+            }
+        });
+
+    });
+
+</script>
+</body>
+</html>
