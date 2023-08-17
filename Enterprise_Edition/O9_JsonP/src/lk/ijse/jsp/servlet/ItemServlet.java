@@ -73,7 +73,7 @@ public class ItemServlet extends HttpServlet {
                     pstm2.setObject(1, code);
                     if (pstm2.executeUpdate() > 0) {
                         resp.getWriter().println("Item Deleted..!");
-                        resp.sendRedirect("/jsp/pages/item.jsp");
+                        resp.sendRedirect("/jsonp/pages/item.jsp");
                     }
                     break;
                 case "update":
@@ -84,7 +84,7 @@ public class ItemServlet extends HttpServlet {
                     pstm3.setObject(4, code);
                     if (pstm3.executeUpdate() > 0) {
                         resp.getWriter().println("Item Updated..!");
-                        resp.sendRedirect("/jsp/pages/item.jsp");
+                        resp.sendRedirect("/jsonp/pages/item.jsp");
                     }
                     break;
             }

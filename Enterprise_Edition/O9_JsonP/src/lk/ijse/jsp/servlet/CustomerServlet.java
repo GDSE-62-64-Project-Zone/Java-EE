@@ -91,7 +91,7 @@ public class CustomerServlet extends HttpServlet {
                     break;
             }
 
-            resp.sendRedirect("/jsp/pages/customer");
+            resp.sendRedirect("/jsonp/pages/customer");
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
