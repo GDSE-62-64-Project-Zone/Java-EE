@@ -81,9 +81,14 @@ public class CustomerServlet extends HttpServlet {
                     pstm.setObject(1, cusID);
                     pstm.setObject(2, cusName);
                     pstm.setObject(3, cusAddress);
+                    resp.addHeader("Content-Type","application/json");
 
                     if (pstm.executeUpdate() > 0) {
-                        resp.getWriter().println("Customer Added..!");
+                        JsonObjectBuilder response = Json.createObjectBuilder();
+                        response.add("state","Ok");
+                        response.add("message","Successfully Added.!");
+                        response.add("data","");
+                        resp.getWriter().print(response.build());
                     }
                     break;
                 case "delete":
@@ -92,6 +97,7 @@ public class CustomerServlet extends HttpServlet {
                     if (pstm2.executeUpdate() > 0) {
                         resp.getWriter().println("Customer Deleted..!");
                     }
+
                     break;
                 case "update":
                     PreparedStatement pstm3 = connection.prepareStatement("update Customer set name=?,address=? where id=?");
@@ -107,8 +113,15 @@ public class CustomerServlet extends HttpServlet {
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            JsonObjectBuilder response = Json.createObjectBuilder();
+            response.add("state","Error");
+            response.add("message",e.getMessage());
+            response.add("data","");
+            resp.setStatus(400);
+            resp.getWriter().print(response.build());
+
         }
     }
 }
