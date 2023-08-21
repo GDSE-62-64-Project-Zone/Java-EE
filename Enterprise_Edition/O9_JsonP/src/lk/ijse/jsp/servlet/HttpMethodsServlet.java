@@ -79,16 +79,37 @@ public class HttpMethodsServlet extends HttpServlet {
 //
 //        System.out.println("DO PUT "+id+" "+name+" "+address+" "+salary);
 
+//        JsonReader reader = Json.createReader(req.getReader());
+//        JsonObject jsonObject = reader.readObject();
+//        String c_id = jsonObject.getString("id");
+//        String c_name = jsonObject.getString("name");
+//        String c_address = jsonObject.getString("address");
+//        String c_salary = jsonObject.getString("salary");
+//
+//
+////        System.out.println("DO GET "+id+" "+name+" "+address+" "+salary);
+//        System.out.println("DO PUT "+c_id+" "+c_name+" "+c_address+" "+c_salary);
+
+
+
+        //Read  more complex data
         JsonReader reader = Json.createReader(req.getReader());
-        JsonObject jsonObject = reader.readObject();
-        String c_id = jsonObject.getString("id");
-        String c_name = jsonObject.getString("name");
-        String c_address = jsonObject.getString("address");
-        String c_salary = jsonObject.getString("salary");
+        JsonArray jsonValues = reader.readArray();
+        for (JsonValue jsonValue : jsonValues) {
+            JsonObject jsonObject = jsonValue.asJsonObject();
+            String oid = jsonObject.getString("oid");
+            String date = jsonObject.getString("date");
+            JsonArray orderDetails = jsonObject.getJsonArray("orderDetails");
 
+            System.out.print(oid+ " : "+date);
+            for (JsonValue orderDetail : orderDetails) {
+                JsonObject odOb = orderDetail.asJsonObject();
+                String code = odOb.getString("code");
+                System.out.print(": "+code);
+            }
+            System.out.println();
 
-//        System.out.println("DO GET "+id+" "+name+" "+address+" "+salary);
-        System.out.println("DO PUT "+c_id+" "+c_name+" "+c_address+" "+c_salary);
+        }
 
 //        [
 //    {

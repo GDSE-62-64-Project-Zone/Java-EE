@@ -56,17 +56,17 @@
                     <span class="control-error" id="lblcussalary"></span>
                 </div>
                 <div class="btn-group">
-                    <button  type="button" class="btn btn-primary" id="btnCustomer">
+                    <button type="button" class="btn btn-primary" id="btnCustomer">
                         Save Customer
                     </button>
-                    <button  type="button" class="btn btn-danger"
+                    <button type="button" class="btn btn-danger"
                             id="btnCusDelete">Remove
                     </button>
-                    <button  type="button" class="btn btn-warning"
+                    <button type="button" class="btn btn-warning"
                             id="btnUpdate">Update
                     </button>
                     <button type="button" class="btn btn-success" id="btnGetAll">Get All</button>
-                    <button  type="button" class="btn btn-danger" id="btn-clear1">Clear All</button>
+                    <button type="button" class="btn btn-danger" id="btn-clear1">Clear All</button>
                 </div>
             </form>
         </div>
@@ -101,40 +101,40 @@
         getAllCustomers();
     });
 
-    function getAllCustomers(){
+    function getAllCustomers() {
         $("#tblCustomer").empty();
         <!--send ajax request to the customer servlet using jQuery-->
         $.ajax({
             url: 'customer',
-            dataType:"json",
+            dataType: "json",
             success: function (customers) {
                 for (let i in customers) {
                     let cus = customers[i];
                     let id = cus.id;
                     let name = cus.name;
                     let address = cus.address;
-                    let row=`<tr><td>${id}</td><td>${name}</td><td>${address}</td></tr>`;
+                    let row = `<tr><td>${id}</td><td>${name}</td><td>${address}</td></tr>`;
                     $("#tblCustomer").append(row);
                 }
             },
-            error:function(error){
+            error: function (error) {
                 console.log(error);
             }
         });
     }
 
-    $("#btnCustomer").click(function (){
-        let formData=$("#customerForm").serialize();
+    $("#btnCustomer").click(function () {
+        let formData = $("#customerForm").serialize();
         $.ajax({
-            url:"customer",
-            method:"post",
-            data:formData,
-            success:function (res){
+            url: "customer",
+            method: "post",
+            data: formData,
+            success: function (res) {
                 console.log(res);
                 alert(res.message);
                 getAllCustomers();
             },
-            error:function (error){
+            error: function (error) {
                 console.log(error.responseJSON);
                 alert(error.responseJSON.message);
             }
@@ -142,25 +142,40 @@
 
     });
 
-    $("#btnCusDelete").click(function(){
-        let formData=$("#customerForm").serialize();
+    $("#btnCusDelete").click(function () {
+        let formData = $("#customerForm").serialize();
         $.ajax({
-            url:'customer?option=delete',
-            method:'post',
-            data:formData,
-            success:function (resp){
+            url: 'customer?option=delete',
+            method: 'post',
+            data: formData,
+            success: function (resp) {
                 getAllCustomers();
             }
         });
     });
 
-    $("#btnUpdate").click(function (){
-        let formData=$("#customerForm").serialize();
+    $("#btnUpdate").click(function () {
+
+        let id = $("#txtCustomerID").val();
+        let name = $("#txtCustomerName").val();
+        let address = $("#txtCustomerAddress").val();
+        let salary = $("#txtCustomerSalary").val();
+
+        //json object
+        let a = {
+            "cusID": id,
+            "cusName": name,
+            "cusAddress": address,
+            "cusSalary": salary
+        }
+
+
         $.ajax({
-            url:'customer',
-            method:'put',
-            data:formData,
-            success:function (resp){
+            url: 'customer',
+            method: 'put',
+            contentType:"application/json",
+            data:JSON.stringify(a),
+            success: function (resp) {
                 getAllCustomers();
             }
         });

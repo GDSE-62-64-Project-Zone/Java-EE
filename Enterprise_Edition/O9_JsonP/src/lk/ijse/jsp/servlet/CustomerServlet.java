@@ -1,8 +1,6 @@
 package lk.ijse.jsp.servlet;
 
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
+import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -109,12 +107,14 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String cusID = req.getParameter("cusID");
-        String cusName = req.getParameter("cusName");
-        String cusAddress = req.getParameter("cusAddress");
-        String cusSalary = req.getParameter("cusSalary");
 
-        System.out.println(cusID+" : "+cusName+" : "+cusAddress+" : "+cusSalary);
+        JsonReader reader = Json.createReader(req.getReader());
+        JsonObject jsonObject = reader.readObject();
+        String cusID = jsonObject.getString("cusID");
+        String cusName = jsonObject.getString("cusName");
+        String cusAddress = jsonObject.getString("cusAddress");
+        String salary = jsonObject.getString("cusSalary");
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
