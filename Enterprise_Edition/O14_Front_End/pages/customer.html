@@ -94,20 +94,24 @@
 
 <!--bind a event on btn GetAll btn-->
 <script>
+    const BASE_URL="http://localhost:8080/jsonp/pages/";
 
     getAllCustomers();
 
+    //get all customer function
     $("#btnGetAll").click(function () {
         getAllCustomers();
     });
 
+    // get all customers
     function getAllCustomers() {
         $("#tblCustomer").empty();
         <!--send ajax request to the customer servlet using jQuery-->
         $.ajax({
-            url: 'http://localhost:8080/jsonp/pages/customer',
+            url: BASE_URL+'customer',
             dataType: "json",
-            success: function (customers) {
+            success: function (response) {
+                let customers = response.data;
                 for (let i in customers) {
                     let cus = customers[i];
                     let id = cus.id;
@@ -118,72 +122,74 @@
                 }
             },
             error: function (error) {
-                console.log(error);
+                alert(error.responseJSON.message);
             }
         });
     }
 
+    // save customer function
     $("#btnCustomer").click(function () {
         let formData = $("#customerForm").serialize();
         $.ajax({
-            url: "http://localhost:8080/jsonp/pages/customer",
+            url: BASE_URL+"customer",
             method: "post",
             data: formData,
             success: function (res) {
-                console.log(res);
                 alert(res.message);
                 getAllCustomers();
             },
             error: function (error) {
-                console.log(error.responseJSON);
                 alert(error.responseJSON.message);
             }
         });
-
     });
 
+    //delete customer function
     $("#btnCusDelete").click(function () {
         let id = $("#txtCustomerID").val();
         $.ajax({
-            url: 'http://localhost:8080/jsonp/pages/customer?cusID='+id,
+            url: BASE_URL+'customer?cusID=' + id,
             method: 'delete',
             success: function (resp) {
+                alert(resp.message);
                 getAllCustomers();
+            },
+            error: function (error) {
+                alert(error.responseJSON.message);
             }
         });
     });
 
+    //update customer function
     $("#btnUpdate").click(function () {
-
         let id = $("#txtCustomerID").val();
         let name = $("#txtCustomerName").val();
         let address = $("#txtCustomerAddress").val();
         let salary = $("#txtCustomerSalary").val();
 
         //json object
-        let a = {
+        let object = {
             "cusID": id,
             "cusName": name,
             "cusAddress": address,
             "cusSalary": salary
         }
 
-
         $.ajax({
-            url: 'http://localhost:8080/jsonp/pages/customer',
+            url: BASE_URL+'customer',
             method: 'put',
-            contentType:"application/json",
-            data:JSON.stringify(a),
+            contentType: "application/json",
+            data: JSON.stringify(object),
             success: function (resp) {
+                alert(resp.message);
                 getAllCustomers();
+            },
+            error: function (error) {
+                alert(error.responseJSON.message);
             }
         });
     });
 </script>
-
-
-<!--when the response received catch it and set it to the table-->
-
 
 </body>
 </html>
