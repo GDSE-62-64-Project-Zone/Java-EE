@@ -1,5 +1,7 @@
 package lk.ijse.jsp.servlet;
 
+import lk.ijse.jsp.servlet.util.ResponseUtil;
+
 import javax.json.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,27 +18,15 @@ public class CustomerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            //Add Headers
+            resp.addHeader("Access-Control-Allow-Origin", "*");
+            resp.addHeader("Content-Type", "application/json");
+
+            //Initializing connection
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet rst = pstm.executeQuery();
-//            resp.addHeader("Content-Type", "application/json");
-
-//            String json="[";
-//            while (rst.next()) {
-//                String customer="{";
-//                String id = rst.getString(1);
-//                String name = rst.getString(2);
-//                String address = rst.getString(3);
-//                customer+="\"id\":\""+id+"\",";
-//                customer+="\"name\":\""+name+"\",";
-//                customer+="\"address\":\""+address+"\"";
-//                customer+="},";
-//                json+=customer;
-//            }
-//            json=json+"]";
-//
-//            resp.getWriter().print(json.substring(0,json.length()-2)+"]");
 
             JsonArrayBuilder allCustomers = Json.createArrayBuilder();
             while (rst.next()) {
@@ -50,15 +40,15 @@ public class CustomerServlet extends HttpServlet {
                 customerObject.add("address", address);
                 allCustomers.add(customerObject.build());
             }
-
-            resp.getWriter().print(allCustomers.build());
-
+            //create the response Object
+            resp.getWriter().print(ResponseUtil.genJson("Success", "Loaded", allCustomers.build()));
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
         }
-
     }
 
     @Override
@@ -68,6 +58,10 @@ public class CustomerServlet extends HttpServlet {
         String cusAddress = req.getParameter("cusAddress");
         String cusSalary = req.getParameter("cusSalary");
 
+        //Add Headers
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Content-Type", "application/json");
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
@@ -76,37 +70,28 @@ public class CustomerServlet extends HttpServlet {
             pstm.setObject(1, cusID);
             pstm.setObject(2, cusName);
             pstm.setObject(3, cusAddress);
-            resp.addHeader("Content-Type", "application/json");
 
             if (pstm.executeUpdate() > 0) {
-                JsonObjectBuilder response = Json.createObjectBuilder();
-                response.add("state", "Ok");
-                response.add("message", "Successfully Added.!");
-                response.add("data", "");
-                resp.getWriter().print(response.build());
+                resp.getWriter().print(ResponseUtil.genJson("Success", "Successfully Added.!"));
             }
 
         } catch (ClassNotFoundException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
 
         } catch (SQLException e) {
-            JsonObjectBuilder response = Json.createObjectBuilder();
-            response.add("state", "Error");
-            response.add("message", e.getMessage());
-            response.add("data", "");
-            resp.setStatus(400);
-            resp.getWriter().print(response.build());
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
 
         }
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //Add Headers
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Content-Type", "application/json");
 
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
@@ -120,17 +105,22 @@ public class CustomerServlet extends HttpServlet {
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
 
-            PreparedStatement pstm3 = connection.prepareStatement("update Customer set name=?,address=? where id=?");
-            pstm3.setObject(3, cusID);
-            pstm3.setObject(1, cusName);
-            pstm3.setObject(2, cusAddress);
-            if (pstm3.executeUpdate() > 0) {
-                resp.getWriter().println("Customer Updated..!");
+            PreparedStatement pstm = connection.prepareStatement("update Customer set name=?,address=? where id=?");
+            pstm.setObject(3, cusID);
+            pstm.setObject(1, cusName);
+            pstm.setObject(2, cusAddress);
+
+            if (pstm.executeUpdate() > 0) {
+                resp.getWriter().print(ResponseUtil.genJson("Success", "Customer Updated..!"));
+            }else{
+                resp.getWriter().print(ResponseUtil.genJson("Failed", "Customer Updated Failed..!"));
             }
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
         }
 
 
@@ -138,23 +128,36 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String cusID = req.getParameter("cusID");
+        //Add Headers
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Content-Type", "application/json");
 
+        String cusID = req.getParameter("cusID");
         try {
             Class.forName("com.mysql.jdbc.Driver");
-
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
 
-            PreparedStatement pstm2 = connection.prepareStatement("delete from Customer where id=?");
-            pstm2.setObject(1, cusID);
-            if (pstm2.executeUpdate() > 0) {
-                resp.getWriter().println("Customer Deleted..!");
-            }
+            PreparedStatement pstm = connection.prepareStatement("delete from Customer where id=?");
+            pstm.setObject(1, cusID);
 
+            if (pstm.executeUpdate() > 0) {
+                resp.getWriter().print(ResponseUtil.genJson("Success", "Customer Deleted..!"));
+            }else{
+                resp.getWriter().print(ResponseUtil.genJson("Failed", "Customer Delete Failed..!"));
+            }
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            resp.setStatus(500);
+            resp.getWriter().print(ResponseUtil.genJson("Error", e.getMessage()));
         }
+    }
+
+    @Override
+    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Methods", "PUT, DELETE");
+        resp.addHeader("Access-Control-Allow-Headers", "content-type");
     }
 }
