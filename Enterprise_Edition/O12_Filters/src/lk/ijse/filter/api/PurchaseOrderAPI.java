@@ -7,15 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/customer")
-public class CustomerAPI extends HttpServlet {
+@WebServlet(urlPatterns = "/po")
+public class PurchaseOrderAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String test = (String) req.getAttribute("test");
-//        System.out.println("Customer DO-Get Invoked "+test);
-//        resp.addHeader("testing-header","Test-Header-FROM-Servlet");
-
-        resp.getWriter().write("<h1>Customer Servlet</h1>");
+        resp.getWriter().write("<h1>Purchase Order API</h1>");
     }
 }
