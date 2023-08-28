@@ -11,6 +11,7 @@
           <element id="library" level="project" name="mysql-connector-j-8.1.0" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="O16_POS_SPA_Back_End/web/Web" />
     </root>
   </artifact>
 </component>
