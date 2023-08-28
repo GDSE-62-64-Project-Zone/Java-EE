@@ -13,7 +13,15 @@ public class CustomerFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        System.out.println("Customer Filter Do filter method invoked");
+        //1 Run before sending request to the servlet
+        System.out.println("Before: Customer Filter Do filter method invoked");
+
+        //Send request to servlet
+        filterChain.doFilter(servletRequest,servletResponse);
+
+        //Run after getting the output of the servlet
+        System.out.println("After : Customer Filter Do filter method invoked");
+
     }
 
     @Override
