@@ -12,6 +12,8 @@ public class CustomerAPI extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Customer DO-Get Invoked");
+        String test = (String) req.getAttribute("test");
+        System.out.println("Customer DO-Get Invoked "+test);
+        resp.addHeader("testing-header","Test-Header-FROM-Servlet");
     }
 }
