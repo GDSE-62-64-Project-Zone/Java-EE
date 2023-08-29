@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/customers")
+//@WebFilter(urlPatterns = "/customers")
 public class CustomerFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         System.out.println("Customer Filter Init");

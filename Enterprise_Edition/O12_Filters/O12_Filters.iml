@@ -21,5 +21,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mysql-connector-j-8.1.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.83" level="application_server_libraries" />
+    <orderEntry type="library" name="json_p" level="project" />
   </component>
 </module>
