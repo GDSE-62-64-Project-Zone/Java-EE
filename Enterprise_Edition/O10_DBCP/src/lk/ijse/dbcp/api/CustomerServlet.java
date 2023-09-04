@@ -24,6 +24,7 @@ public class CustomerServlet extends HttpServlet {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/company", "root", "sanu1234");
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet rst = pstm.executeQuery();
+            resp.addHeader("Content-Type","application/json");
 
             JsonArrayBuilder allCustomers = Json.createArrayBuilder();
             while (rst.next()) {
