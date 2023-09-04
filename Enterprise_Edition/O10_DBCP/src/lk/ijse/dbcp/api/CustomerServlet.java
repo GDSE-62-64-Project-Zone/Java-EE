@@ -20,6 +20,22 @@ import java.sql.SQLException;
 @WebServlet(urlPatterns = "/customer")
 public class CustomerServlet extends HttpServlet {
 
+    //01_Instantiate
+    public CustomerServlet(){
+        System.out.println("Customer Servlet Constructor");
+    }
+    //02-Convert this class to a fully functional servlet
+    @Override
+    public void init() throws ServletException {
+        System.out.println("I am a servlet now");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("Servlet is dead");
+    }
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
