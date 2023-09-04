@@ -18,9 +18,6 @@ public class PurchaseOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-//            //Add Headers
-//            resp.addHeader("Access-Control-Allow-Origin", "*");
-//            resp.addHeader("Content-Type", "application/json");
 
             String orderID = req.getParameter("oid");
 
@@ -64,9 +61,6 @@ public class PurchaseOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        //Add Headers
-//        resp.addHeader("Access-Control-Allow-Origin", "*");
-//        resp.addHeader("Content-Type", "application/json");
 
         //get order and order details
         //so here we have to use json data because to purchase an order we need a series of data
@@ -139,10 +133,5 @@ public class PurchaseOrderServlet extends HttpServlet {
         }
     }
 
-//    @Override
-//    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.addHeader("Access-Control-Allow-Origin", "*");
-//        resp.addHeader("Access-Control-Allow-Methods", "PUT, DELETE");
-//        resp.addHeader("Access-Control-Allow-Headers", "content-type");
-//    }
+
 }

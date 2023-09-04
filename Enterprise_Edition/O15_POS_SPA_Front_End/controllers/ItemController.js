@@ -178,7 +178,7 @@ function updateItem(code) {
     } else {
         let consent = confirm("Do you really want to update this Item.?");
         if (consent) {
-            let item = searchItem(code);
+            let item = searchItem(code)[0];
             //if the item available can we update.?
 
             let itemName = $("#itemName").val();

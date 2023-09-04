@@ -179,9 +179,9 @@ function updateCustomer(id) {
     } else {
         let consent = confirm("Do you really want to update this customer.?");
         if (consent) {
-            let customer = searchCustomer(id);
+            let customer = searchCustomer(id)[0];
             //if the customer available can we update.?
-
+            console.log(customer);
             let customerName = $("#txtCustomerName").val();
             let customerAddress = $("#txtCustomerAddress").val();
             let customerSalary = $("#txtCustomerSalary").val();

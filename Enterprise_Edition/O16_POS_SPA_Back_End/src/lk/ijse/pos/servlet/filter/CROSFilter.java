@@ -40,6 +40,8 @@ public class CROSFilter implements Filter {
             //otherwise if it is a GET,POST,PUT or DELETE we can append the
             //following common header
             res.addHeader("Access-Control-Allow-Origin", "*");
+            res.addHeader("Content-Type", "application/json");
+
         }
     }
 

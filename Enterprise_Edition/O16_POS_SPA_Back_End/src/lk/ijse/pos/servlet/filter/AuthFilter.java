@@ -33,7 +33,7 @@ public class AuthFilter implements Filter {
         //so, if the Auth header is present and username & password
         //are matching with every request then we can proceed the request
         //to relevant servlet
-        if (auth != null && auth.equals("user=admin,pass=admins")) {
+        if (auth != null && auth.equals("user=admin,pass=admin")) {
             //forward the request to the requested servlet
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
@@ -41,6 +41,7 @@ public class AuthFilter implements Filter {
             //to access the service
             res.addHeader("Content-Type", "application/json");
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
             JsonObject jsonObject = ResponseUtil.genJson("Auth-Error", "You are not Authenticated to use this Service.!");
             res.getWriter().print(jsonObject);
         }

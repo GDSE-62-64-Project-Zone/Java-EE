@@ -18,9 +18,6 @@ public class ItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            //Add Headers
-//            resp.addHeader("Access-Control-Allow-Origin", "*");
-//            resp.addHeader("Content-Type", "application/json");
 
             //Initializing connection
             Class.forName("com.mysql.jdbc.Driver");
@@ -61,9 +58,6 @@ public class ItemServlet extends HttpServlet {
         String itemQty = req.getParameter("itemQty");
         String unitPrice = req.getParameter("unitPrice");
 
-        //Add Headers
-//        resp.addHeader("Access-Control-Allow-Origin", "*");
-//        resp.addHeader("Content-Type", "application/json");
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -92,10 +86,6 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        //Add Headers
-//        resp.addHeader("Access-Control-Allow-Origin", "*");
-//        resp.addHeader("Content-Type", "application/json");
 
         JsonReader reader = Json.createReader(req.getReader());
         JsonObject jsonObject = reader.readObject();
@@ -134,9 +124,6 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //Add Headers
-//        resp.addHeader("Access-Control-Allow-Origin", "*");
-//        resp.addHeader("Content-Type", "application/json");
 
         String code = req.getParameter("code");
         try {
@@ -160,10 +147,4 @@ public class ItemServlet extends HttpServlet {
         }
     }
 
-//    @Override
-//    protected void doOptions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.addHeader("Access-Control-Allow-Origin", "*");
-//        resp.addHeader("Access-Control-Allow-Methods", "PUT, DELETE");
-//        resp.addHeader("Access-Control-Allow-Headers", "content-type");
-//    }
 }
