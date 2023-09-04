@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//http://localhost:8080/filter/customer
 @WebServlet(urlPatterns = "/customer")
 public class CustomerAPI extends HttpServlet {
 
