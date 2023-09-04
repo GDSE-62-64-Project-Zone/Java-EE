@@ -6,6 +6,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,18 +41,10 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             //Initializing connection
-            BasicDataSource pool = new BasicDataSource();
-            pool.setDriverClassName("com.mysql.jdbc.Driver");
-            pool.setUrl("jdbc:mysql://localhost:3306/company");
-            pool.setUsername("root");
-            pool.setPassword("sanu1234");
-            pool.setInitialSize(3);
-            pool.setMaxTotal(3);
 
-
+            ServletContext servletContext = getServletContext();
+            BasicDataSource pool= (BasicDataSource) servletContext.getAttribute("dbcp");
             Connection connection = pool.getConnection();
-
-
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet rst = pstm.executeQuery();
             resp.addHeader("Content-Type", "application/json");
