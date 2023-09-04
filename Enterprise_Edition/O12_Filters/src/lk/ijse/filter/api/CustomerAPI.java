@@ -16,7 +16,7 @@ public class CustomerAPI extends HttpServlet {
 //        String test = (String) req.getAttribute("test");
 //        System.out.println("Customer DO-Get Invoked "+test);
 //        resp.addHeader("testing-header","Test-Header-FROM-Servlet");
-
+        System.out.println("Request Received to the Servlet");
         resp.getWriter().write("<h1>Customer Servlet</h1>");
     }
 }
