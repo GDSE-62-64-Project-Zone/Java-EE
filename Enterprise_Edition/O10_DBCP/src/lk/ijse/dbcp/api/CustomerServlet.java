@@ -39,12 +39,12 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
+        ServletContext servletContext = getServletContext();
+        BasicDataSource pool= (BasicDataSource) servletContext.getAttribute("dbcp");
+       //try resource will close the connection automatically after using
+        try( Connection connection = pool.getConnection()) {
             //Initializing connection
 
-            ServletContext servletContext = getServletContext();
-            BasicDataSource pool= (BasicDataSource) servletContext.getAttribute("dbcp");
-            Connection connection = pool.getConnection();
             PreparedStatement pstm = connection.prepareStatement("select * from Customer");
             ResultSet rst = pstm.executeQuery();
             resp.addHeader("Content-Type", "application/json");
@@ -63,6 +63,7 @@ public class CustomerServlet extends HttpServlet {
                 customerObject.add("salary", salary);
                 allCustomers.add(customerObject.build());
             }
+
             //create the response Object
             resp.getWriter().print(ResponseUtil.genJson("Success", "Loaded", allCustomers.build()));
         } catch (SQLException e) {

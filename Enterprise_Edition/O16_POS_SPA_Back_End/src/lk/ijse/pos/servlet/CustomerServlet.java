@@ -17,7 +17,6 @@ import java.sql.*;
 @WebServlet(urlPatterns = {"/customer"})
 public class CustomerServlet extends HttpServlet {
 
-
     public CustomerServlet(){
         System.out.println("Customer Servlet Constructor Invoked");
     }
